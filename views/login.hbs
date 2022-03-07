@@ -1,0 +1,24 @@
+<div class="card mx-auto" style="width:20rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Rental App</h5>
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <label for="" class="form-label">Username</label>
+            <input type="text" name="nombreusuario" value="{{data.nombreusuario}}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-lg w-100 btn-primary">Log In</button>
+        </div>
+    </form>
+    {{#if error}}
+        <p class="text-danger">* {{ message }}</p>
+    {{/if}}
+  </div>
+  <div class="text-center mt-2 mb-2">
+      <p>¿Nuevo en Rental App? <a href="/register">Create an account</a></p>
+  </div>
+</div>
