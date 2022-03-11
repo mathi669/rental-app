@@ -45,4 +45,4 @@ async function insert(tableName, data) {
     }
 }
 
-module.exports = { insert, checkLogin }
+module.exports = { insert, checkLogin, query }

@@ -1,6 +1,12 @@
+const Book = require("../models/books")
+
 class LibroController {
-    getViewHome(req, res) {
-        return res.render('home', {tittle: 'Home'})
+
+
+    async getViewHome(req, res) {
+        const readAll = await Book.readAllLibros()
+        console.log(readAll)
+        return res.render('home', {tittle: 'Home', readAll})
     }
 }
 
