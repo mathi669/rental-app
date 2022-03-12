@@ -1,5 +1,3 @@
-
-
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rentalapp
@@ -25,7 +23,7 @@ DROP TABLE IF EXISTS `libro`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `libro` (
-  `idlibro` int NOT NULL,
+  `idlibro` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(80) NOT NULL,
   `autor` varchar(45) NOT NULL,
   `año_publicacion` date NOT NULL,
@@ -34,9 +32,10 @@ CREATE TABLE `libro` (
   `provincia` varchar(45) NOT NULL,
   `editorial` varchar(45) NOT NULL,
   `unidades` int NOT NULL,
-  PRIMARY KEY (`idlibro`),
-  UNIQUE KEY `idlibro_UNIQUE` (`idlibro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `img` varchar(100) NOT NULL,
+  `precio` float NOT NULL,
+  PRIMARY KEY (`idlibro`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +44,7 @@ CREATE TABLE `libro` (
 
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
+INSERT INTO `libro` VALUES (1,'Después','stephen king','1992-01-28','terror','terror','estados unidos','MATA',1,'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/despue-s-stephen-king-1622464840.jpg',13.5);
 /*!40000 ALTER TABLE `libro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,9 +62,9 @@ CREATE TABLE `rentas` (
   `fecha_inicio` date NOT NULL,
   `fecha_termino` date NOT NULL,
   PRIMARY KEY (`idrentas`),
-  UNIQUE KEY `idrentas_UNIQUE` (`idrentas`),
-  KEY `iduser_idx` (`iduser`),
-  KEY `idlibro_idx` (`idlibro`),
+  UNIQUE KEY `idrentas` (`idrentas`),
+  KEY `idlibro` (`idlibro`),
+  KEY `iduser` (`iduser`),
   CONSTRAINT `idlibro` FOREIGN KEY (`idlibro`) REFERENCES `libro` (`idlibro`),
   CONSTRAINT `iduser` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -93,12 +93,11 @@ CREATE TABLE `users` (
   `apmaterno` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `nombreusuario` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `nombreusuario_UNIQUE` (`nombreusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `nombreusuario` (`nombreusuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,6 +106,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'matias','luarte','dornemann','mail@gmail.com','matix','$2b$08$.Vyp3tnDWEkDyYPvIvaFV.XiVt/zw97cvjXed0wElKTxviKwJfGAC');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -119,4 +119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-05 16:39:10
+-- Dump completed on 2022-03-12 13:35:37

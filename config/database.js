@@ -37,6 +37,7 @@ async function checkLogin(data) {
 }
 
 async function insert(tableName, data) {
+    
     try {
         let result = await query(`INSERT INTO ${tableName}(??) VALUES (?)`, [Object.keys(data), Object.values(data)])
         return {data: result, success: true}

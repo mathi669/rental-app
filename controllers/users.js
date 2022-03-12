@@ -16,6 +16,7 @@ class UserController {
 
     logout(req, res) {
         req.session.destroy()
+        return res.redirect('/')
     }
 
     async register(req, res) {
@@ -26,7 +27,7 @@ class UserController {
             if (!result.success) {
                 return res.render('register',{error: true, message: result.error, data: req.body})
             }
-            return res.redirect('/home')
+            return res.redirect('/')
         } else {
             return res.render('register', {error: true, message: validation.errors, data: req.body})
         }
@@ -44,7 +45,7 @@ class UserController {
         req.session.loggedIn = true
         req.session.username = dataresult[0].nombreusuario
         req.session.idUser = dataresult[0].id
-        return res.redirect('/home')
+        return res.redirect('/')
     }
 }
 
