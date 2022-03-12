@@ -94,6 +94,10 @@ body {
   width: 100%;
 }
 
+.img-card {
+  height: 450px;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;

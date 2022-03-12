@@ -6,7 +6,6 @@ class LibroController {
 
     async getViewHome(req, res) {
         const readAll = await Book.readAllLibros()
-        // console.log(readAll)
         return res.render('home', {tittle: 'Home', readAll})
     }
 
@@ -29,8 +28,7 @@ class LibroController {
     }
 
     async readBookId(req, res){
-        let datos = await Book.readBookById(req.params.id)
-        console.log(datos[0])
+        let datos = await Book.readBookById(req.params.id)        
         return res.render('details', {data: datos[0]})
 
     }
@@ -41,7 +39,6 @@ class LibroController {
     }
     async editBook(req, res){
         let datos = await Book.readBookById(req.params.id)
-        console.log(datos[0])
         return res.render('edit', {data: datos[0]})
 
     }

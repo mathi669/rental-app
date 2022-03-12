@@ -27,7 +27,7 @@ app.engine('hbs', engine({
     partialsDir: path.join(__dirname,'views','components'),
     helpers:{
         formatDate: function(date){
-            const newDate = moment(date).format('yyyy/MM/DD');
+            const newDate = moment(date).format('yyyy-MM-DD');
             return newDate;
         },
     },

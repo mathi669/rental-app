@@ -1,5 +1,11 @@
 <div class="bg-dark footer text-center">
     <footer>
-        <a href="" class="text-light">Info</a>
+        <span id="date" class="text-light"></span>
     </footer>
 </div>
+<script>
+    let date = new Date();
+    let year = date.getFullYear();
+    document.getElementById('date').innerHTML = year
+    console.log(year)
+</script>
