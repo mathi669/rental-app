@@ -43,6 +43,20 @@ class Book {
         }
         return result
     }
+
+    static async readBookById(id){
+        let details = await query("SELECT * FROM libro WHERE idlibro=?", [id])
+        return details 
+    }
+
+    static async deleteBook(id){
+        let borrar = await query("DELETE FROM libro WHERE idlibro=?", [id])
+        return borrar
+    }
+    static async update(data, id){
+        let actualizar = await query("UPDATE libro SET ? WHERE idlibro=?", [data, id])
+        return actualizar
+    }
 }
 
 module.exports = Book

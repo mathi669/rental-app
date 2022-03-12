@@ -1,3 +1,4 @@
+const { query } = require("express")
 const Book = require("../models/books")
 
 class LibroController {
@@ -25,6 +26,28 @@ class LibroController {
         } else {
             return res.render('bookRegister', {error: true, message: validation.errors, data: req.body})
         }
+    }
+
+    async readBookId(req, res){
+        let datos = await Book.readBookById(req.params.id)
+        console.log(datos[0])
+        return res.render('details', {data: datos[0]})
+
+    }
+
+    async borrarLibro(req, res){
+        let libro = await Book.deleteBook(req.params.id)
+        return res.json(libro)
+    }
+    async editBook(req, res){
+        let datos = await Book.readBookById(req.params.id)
+        console.log(datos[0])
+        return res.render('edit', {data: datos[0]})
+
+    }
+    async updateBook(req, res){
+        let edit = await Book.update(req.body, req.params.id)
+        return res.redirect("/")
     }
 }
 

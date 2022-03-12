@@ -1,0 +1,51 @@
+<div class="card mx-auto mt-5" style="width:80%;">
+    <h5 class="card-title text-center">Editar libro</h5>
+    <div class="card-body">
+        <form action="/edit/{{data.idlibro}}" method="post" class="row">
+            <div class="mb-3 col-md-6 col-md-6">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" name="nombre" value="{{data.nombre}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">autor</label>
+                <input type="text" name="autor" value="{{data.autor}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Año de publicacion</label>
+                <input type="date" name="año_publicacion" value="{{formatDate data.año_publicacion}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Edicion</label>
+                <input type="text" name="edicion" value="{{data.edicion}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Categoria</label>
+                <input type="text" name="categoria" value="{{data.categoria}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Provincia</label>
+                <input type="text" name="provincia" value="{{data.provincia}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Editorial</label>
+                <input type="text" name="editorial" value="{{data.editorial}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Unidades</label>
+                <input type="text" name="unidades" value="{{data.unidades}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Imagen</label>
+                <input type="text" name="img" value="{{data.img}}" class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="" class="form-label">Precio</label>
+                <input type="text" name="precio" value="{{data.precio}}" class="form-control">
+            </div>
+            <button class="btn btn-primary">Guardar cambios</button>
+        </form>
+        {{#if error}}
+            <p class="text-danger">* {{ message }}</p>
+        {{/if}}
+    </div>
+</div>
