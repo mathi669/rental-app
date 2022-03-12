@@ -29,7 +29,7 @@ function query(sql, data) {
 
 async function checkLogin(data) {
     try {
-        let dataUser = await query(`SELECT * FROM users WHERE nombreusuario = ? and password = ?`,[data.nombreusuario, data.password])
+        let dataUser = await query(`SELECT * FROM users WHERE nombreusuario = ? `,[data.nombreusuario])
         return dataUser
     } catch (error) {
         return error

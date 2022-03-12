@@ -1,4 +1,5 @@
 const { insert, checkLogin } = require("../config/database")
+const bcrypt = require('bcrypt')
 
 class User {
     constructor(user) {
@@ -7,7 +8,11 @@ class User {
         this.apmaterno = user.apmaterno,
         this.email = user.email,
         this.nombreusuario = user.nombreusuario,
-        this.password = user.password
+        this.password = this.hasPassword(user.password)
+    }
+
+    hasPassword(xpassword){
+        return bcrypt.hashSync(xpassword,8)
     }
 
     static async login(data) {

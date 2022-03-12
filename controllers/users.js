@@ -1,4 +1,5 @@
 const User = require("../models/users")
+const bcrypt = require('bcrypt')
 
 class UserController {
     getViewIndex(req, res) {
@@ -11,6 +12,10 @@ class UserController {
 
     getViewLogin(req, res) {
         return res.render('login', {tittle: 'Log In'})
+    }
+
+    logout(req, res) {
+        req.session.destroy()
     }
 
     async register(req, res) {
@@ -32,9 +37,13 @@ class UserController {
     async login(req, res) {
         let dataresult = await User.login(req.body)
         let tam = Object.keys(dataresult).length
-        if (tam == 0) {
+
+        if (tam === 0 || !(await bcrypt.compare(req.body.password, dataresult[0].password))) {
             return res.render('login', {error: true, message: 'Nombre de usuario y/o contraseña incorrecta', data: req.body})
         }
+        req.session.loggedIn = true
+        req.session.username = dataresult[0].nombreusuario
+        req.session.idUser = dataresult[0].id
         return res.redirect('/home')
     }
 }
