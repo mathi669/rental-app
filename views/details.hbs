@@ -29,13 +29,22 @@
             <a href="/edit/{{data.idlibro}}" class="btn btn-success">Editar</a>
             </div>
 
-            <form action="" class="mt-2">
-            <div class="form-group">
-                <label>Cantidad</label>
-                <input type="number" placeholder="1" class="form-control">
-            </div>
-            <button class="btn btn-danger mt-2" type="button">Rent</button>
-            </form>
+            <h4 class="mt-2">Rentar Libro</h4>
+            {{#if session.loggedIn}}
+                <form action="/saveRent" method="post" class="mt-2">
+                    <div class="form-group">
+                        <input value="{{data.idlibro}}" name="idlibro" hidden>
+                        <label>Cantidad</label>
+                        <input type="number" placeholder="1" class="form-control">
+                        <label>Fecha Término</label>
+                        <input type="date" class="form-control" name="fecha_termino">
+                        <input type="date" value="{{dateToday}}" name="fecha_inicio" hidden>
+                    </div>
+                    <button class="btn btn-danger mt-2" type="submit">Rent</button>
+                </form>
+            {{else}}
+                <h5>Inicie Sesión para poder rentar un libro <a href="/login">Log In</a></h5>
+            {{/if}}            
       </div>
   </section>
   </div>
