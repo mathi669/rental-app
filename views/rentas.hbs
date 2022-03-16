@@ -1,0 +1,9 @@
+<div>
+    {{#each data}}
+        <p>{{this.cantidad}} - {{this.nombre}}</p>
+        {{#if ../booleano}}
+            <p class="text-danger">El plazo de la renta a vencido</p>
+        {{/if}}
+        <a href="/devolucion/{{this.idlibro}}/{{this.cantidad}}/{{this.idrentas}}" class="btn btn-primary">Devolver</a>
+    {{/each}}
+</div>

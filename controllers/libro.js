@@ -1,4 +1,3 @@
-const { query } = require("express")
 const Book = require("../models/books")
 
 class LibroController {
@@ -10,7 +9,8 @@ class LibroController {
     }
 
     getLibros(req, res){
-        return res.render('bookRegister',{tittle: 'Registo libro'})
+        let idUser = req.session.idUser
+        return res.render('bookRegister',{tittle: 'Registo libro', id: idUser})
     }
 
     async saveLibros(req,res){
@@ -28,8 +28,9 @@ class LibroController {
     }
 
     async readBookId(req, res){
-        let datos = await Book.readBookById(req.params.id)        
-        return res.render('details', {data: datos[0]})
+        let datos = await Book.readBookById(req.params.id)
+        let validate = datos[0].iduser === req.session.idUser
+        return res.render('details', {data: datos[0], stock: datos[0].unidades === 0, validate})
 
     }
 
@@ -43,7 +44,7 @@ class LibroController {
 
     }
     async updateBook(req, res){
-        let edit = await Book.update(req.body, req.params.id)
+        await Book.update(req.body, req.params.id)
         return res.redirect("/")
     }
 }

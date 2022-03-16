@@ -12,7 +12,8 @@ class Book {
         this.editorial = book.editorial,
         this.unidades = book.unidades,
         this.img = book.img,
-        this.precio = book.precio
+        this.precio = book.precio,
+        this.iduser = book.iduser
     }
 
     async save(){
@@ -26,13 +27,25 @@ class Book {
             editorial: this.editorial,
             unidades: this.unidades,
             img: this.img,
-            precio: this.precio
+            precio: this.precio,
+            iduser: this.iduser
         })
         return newBook
     }
 
     static async readAllLibros(){
         return query("SELECT * FROM libro")
+    }
+
+    static async decrementUnits(id, cantidad) {
+        let result = await query(`UPDATE libro SET unidades = unidades - ${cantidad} WHERE idlibro = ?`,[id])
+        console.log(result);
+        return result
+    }
+
+    static async incrementUnits(id, cantidad) {
+        let result = await query(`UPDATE libro SET unidades = unidades + ${cantidad} WHERE idlibro = ?`,[id])
+        return result
     }
 
     validateBook(){
