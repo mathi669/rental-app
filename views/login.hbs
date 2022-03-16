@@ -1,24 +1,101 @@
-<div class="card mx-auto mt-5" style="width:20rem;">
+{{!-- <div class="card mx-auto mt-5" style="width:20rem;">
   <div class="card-body">
     <h5 class="card-title text-center">Rental App</h5>
     <form action="/login" method="post">
-        <div class="mb-3">
-            <label for="" class="form-label">Username</label>
-            <input type="text" name="nombreusuario" value="{{data.nombreusuario}}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control">
-        </div>
-        <div class="text-center">
-            <button class="btn btn-lg w-100 btn-primary">Log In</button>
-        </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Username</label>
+        <input
+          type="text"
+          name="nombreusuario"
+          value="{{data.nombreusuario}}"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" />
+      </div>
+      <div class="text-center">
+        <button class="btn btn-lg w-100 btn-primary">Log In</button>
+      </div>
     </form>
     {{#if error}}
-        <p class="text-danger">* {{ message }}</p>
+      <p class="text-danger">* {{message}}</p>
     {{/if}}
   </div>
   <div class="text-center mt-2 mb-2">
-      <p>¿Nuevo en Rental App? <a href="/register">Create an account</a></p>
+    <p>¿Nuevo en Rental App? <a href="/register">Create an account</a></p>
+  </div>
+</div> --}}
+<style>
+
+  h2{ text-align: center; } .gradient-custom-2 { /* fallback for old browsers */
+  background: #fccb90; /* Chrome 10-25, Safari 5.1-6 */ background:
+  -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); /* W3C,
+  IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ background:
+  linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); }
+  .gradient-custom-2 img{ width: 100%; height: 100%; } @media (min-width: 768px)
+  { .gradient-form { height: 100vh !important; } } @media (min-width: 769px) {
+  .gradient-custom-2 { border-top-right-radius: .3rem;
+  border-bottom-right-radius: .3rem; } }
+</style>
+
+<div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-xl-10">
+      <div class="card rounded-3 text-black">
+        <div class="row g-0">
+          <div class="col-lg-6">
+            <div class="card-body p-md-5 mx-md-4">
+
+              <div class="text-center">
+                <h4 class="mt-1 mb-5 pb-1">Inicia sesión</h4>
+              </div>
+
+              <form action="/login" method="post">
+
+                <div class="mb-3">
+                  <label for="" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    name="nombreusuario"
+                    value="{{data.nombreusuario}}"
+                    class="form-control"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" />
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Log In</button>
+                </div>
+
+              </form>
+              {{#if error}}
+                <p class="text-danger">* {{message}}</p>
+              {{/if}}
+              <div
+                class="d-flex align-items-center justify-content-center pb-4"
+              >
+                <p class="mb-0 me-2">¿Nuevo en rental app?</p>
+                <a
+                  type="button"
+                  class="btn btn-outline-danger"
+                  href="/register"
+                >Crea una cuenta</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+            <div class="img-fluid">
+              <img
+                src="https://oei.int/downloads/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdnd4IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c95218464a51d143d4a90c238198ba82762988fc/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTVRBMU1IZzFPVEVHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--9b08223931e4176717c68b5366e4f5bf3aa970f0/lectura%20en%20mov.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
