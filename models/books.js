@@ -1,4 +1,3 @@
-
 const { insert , query } = require("../config/database")
 
 class Book {
@@ -8,12 +7,10 @@ class Book {
         this.año_publicacion = book.año_publicacion,
         this.edicion = book.edicion,
         this.categoria = book.categoria,
-        this.provincia = book.provincia,
         this.editorial = book.editorial,
         this.unidades = book.unidades,
         this.img = book.img,
-        this.precio = book.precio,
-        this.iduser = book.iduser
+        this.precio = book.precio
     }
 
     async save(){
@@ -23,23 +20,35 @@ class Book {
             año_publicacion: this.año_publicacion,
             edicion:this.edicion,
             categoria:this.categoria,
-            provincia: this.provincia,
             editorial: this.editorial,
             unidades: this.unidades,
             img: this.img,
-            precio: this.precio,
-            iduser: this.iduser
+            precio: this.precio
         })
         return newBook
     }
 
+    // usarlo cuando nadie se haya logeado
     static async readAllLibros(){
         return query("SELECT * FROM libro")
     }
 
+    // usarlo cuando se hayan logeado, mostrar los libros que no son del usuario
+    static async readFilterBooksOtherUser(id) {
+        return query('SELECT * FROM libro WHERE idlibro not in (SELECT idbook FROM user_libro WHERE idusers = ?)',[id])
+    }
+
+    // libros del usuario logeado
+    static async readFilterBooksUser(id) {
+        return query('SELECT * FROM libro l INNER JOIN user_libro ul ON l.idlibro = ul.idbook WHERE idusers = ?',[id])
+    }
+
+    static async readFilterByName(nombre) {
+        return query(`SELECT * FROM libro WHERE nombre LIKE '%${nombre}%'`)
+    }
+
     static async decrementUnits(id, cantidad) {
         let result = await query(`UPDATE libro SET unidades = unidades - ${cantidad} WHERE idlibro = ?`,[id])
-        console.log(result);
         return result
     }
 
@@ -50,7 +59,7 @@ class Book {
 
     validateBook(){
         let result = {success: true, errors: []}
-        if (!(this.nombre && this.autor && this.año_publicacion && this.edicion && this.categoria && this.provincia && this.editorial && this.unidades &&  this.img && this.precio)) {
+        if (!(this.nombre && this.autor && this.año_publicacion && this.edicion && this.categoria && this.editorial && this.unidades &&  this.img && this.precio)) {
             result.success = false
             result.errors.push('Complete todos los campos')
         }

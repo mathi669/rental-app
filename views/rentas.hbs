@@ -1,9 +1,40 @@
 <div>
-    {{#each data}}
-        <p>{{this.cantidad}} - {{this.nombre}}</p>
-        {{#if ../booleano}}
-            <p class="text-danger">El plazo de la renta a vencido</p>
-        {{/if}}
-        <a href="/devolucion/{{this.idlibro}}/{{this.cantidad}}/{{this.idrentas}}" class="btn btn-primary">Devolver</a>
-    {{/each}}
+    {{#if tam}}
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                
+                {{#each dataRenta}}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                    <img class="card-img-top" src="{{this.img}}" alt="..."/>
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                        <h5 class="fw-bolder">Nombre: {{this.nombre}}</h5>
+                        <h6 class="fw">Cantidad: {{this.cantidad}}</h6>
+                        <h6 id="pago{{this.contador}}">Pago: ${{priceCalculate this.cantidad this.precio}}</h6>
+                        </div>
+                        {{!-- {{#if ../booleano}} --}}
+                        {{#if (compareDate this.fecha_termino)}}
+                            <h6 class="text-danger">El plazo de entrega a vencido</h6>
+                            <h6 class="text-secondary" id="recargo{{this.contador}}">Pago por recargo: ${{recargo this.cantidad this.precio}}</h6>
+                        {{/if}}
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <form action="/devolucion/{{this.idlibro}}/{{this.idrentas}}" method="post">
+                                <input name="cantidad" value="{{this.cantidad}}" hidden>
+                                <button type="submit" class="btn btn-outline-primary">Devolver</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {{/each}}                
+            </div>
+        </div>
+    {{else}}
+        <div class="card text-center mx-auto bg-danger mt-5 pt-1" style="width: 18rem;">
+            <p class="text-white">No a rentado libros</p>
+        </div>
+    {{/if}}    
 </div>

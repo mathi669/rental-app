@@ -11,13 +11,16 @@
         </li>
         {{#if session.loggedIn}}
           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/myBooks">My Books</a>
           </li>
           <li class="mav-item">
             <a class="nav-link" href="/bookRegister">Register book</a>
           </li>
           <li class="mav-item">
             <a class="nav-link" href="/rentas">Libros rentados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
           </li>
         {{else}}
           <li class="nav-item">

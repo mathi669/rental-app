@@ -9,9 +9,9 @@
             <h4 class="">
                 {{data.nombre}}
             </h4>
-            <p>
+            {{!-- <p>
                 Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
-            </p>
+            </p> --}}
             <div class="mt-1">
                 <span class=""> <strong>Categories:</strong> {{data.categoria}}
                 <span class=""><strong>Autor:</strong> {{data.autor}}
@@ -21,7 +21,7 @@
                 <span class=""><strong>Edicion:</strong> {{data.edicion}}
             </div>
             <div class="mt-1">
-                <strong>Price : </strong> ${{data.precio}}
+                <strong>Price : </strong>$ <span id="price">{{data.precio}}</span>
                 <strong>Stock: </strong> {{data.unidades}}
             </div>
             {{#if validate}}
@@ -34,28 +34,33 @@
             {{#if stock}}
                 <p>Sin stock</p>
             {{else}}
-                <h4 class="mt-2">Rentar Libro</h4>
-                {{#if session.loggedIn}}
-                    <form action="/saveRent" method="post" class="mt-2">
-                        <div class="form-group">
-                            <input value="{{data.idlibro}}" name="idlibro" hidden>
-                            <label>Cantidad</label>
-                            <input type="number" class="form-control" name="cantidad">
-                            <label>Fecha Término</label>
-                            <input type="date" class="form-control" name="fecha_termino">
-                            <input type="date" value="{{dateToday}}" name="fecha_inicio" hidden>
-                        </div>
-                        <button class="btn btn-danger mt-2" type="submit">Rent</button>
-                    </form>
-                {{else}}
-                    <h5>Inicie Sesión para poder rentar un libro <a href="/login">Log In</a></h5>
-                {{/if}} 
+                {{#unless validate}}
+                    <h4 class="mt-2">Rentar Libro</h4>
+                    {{#if session.loggedIn}}
+                        <form action="/saveRent" method="post" class="mt-2">
+                            <div class="form-group">
+                                <input value="{{data.idlibro}}" name="idlibro" hidden>
+                                <label>Cantidad</label>
+                                <input type="number" class="form-control" name="cantidad">
+                                <label>Fecha Término</label>
+                                <input type="date" class="form-control" name="fecha_termino">
+                                <input type="date" value="{{dateToday}}" name="fecha_inicio" hidden>
+                                <input id="precio" name="precioBook" hidden>
+                            </div>
+                            <button class="btn btn-danger mt-2" type="submit">Rent</button>
+                        </form>
+                    {{else}}
+                        <h5>Inicie Sesión para poder rentar un libro <a href="/login">Log In</a></h5>
+                    {{/if}}
+                {{/unless}}
             {{/if}}           
       </div>
   </section>
   </div>
   </div>
   <script>
+        let precioLbro = document.querySelector('#price').innerHTML
+        document.querySelector('#precio').value = parseFloat(precioLbro).toFixed(2)
         function borrarLibro(id){
             fetch('/delete/'+ id,{method:'delete'})
             .then((res) => {

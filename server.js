@@ -33,6 +33,23 @@ app.engine('hbs', engine({
         dateToday: function(){
             const date = moment().format('yyyy-MM-DD')
             return date
+        },
+        compareDate: (date) => {
+            const result = moment(date).format('yyyy-MM-DD') < moment().format('yyyy-MM-DD')
+            return result
+        },
+        priceCalculate: (quantity, price) => {
+            const result = quantity*price
+            return result.toFixed(2)
+        },
+        recargo: (quantity, price) => {
+            const pago = quantity*price
+            const recargo = pago * 0.15
+            return recargo.toFixed(2)
+        },
+        suma: (num) => {
+            let result = num+1
+            return result
         }
     },
 }))
